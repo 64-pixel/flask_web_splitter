@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block title %}Split things{% endblock %}
+
+{% block content %}
+<form method="POST">
+    <h1 align="center">Split</h1>
+    <button id="enter-bill">Enter Bill</button>
+    <br>
+    <button type="submit" class="btn btn-primary" align="center">Split</button>
+</form>
+<div id="bill-modal" class="modal">
+    <div class="modal-content">
+        <h2 align="center">Enter your bill</h2>
+        <br>
+        <input type="text" placeholder="What are you splitting?">
+        <input type="number" placeholder="Total amount">
+        <input type="number" placeholder="Number of people">
+        <input type="number" placeholder="Your budget"
+
+        <button>Continue</button>
+        <button id="close-modal">Cancel</button>
+    </div>
+</div>
+
+{% endblock %}
