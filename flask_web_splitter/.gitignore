@@ -4,4 +4,4 @@ venv/
 .venv/
 .env
 instance/
-psycopg2-binary
+
