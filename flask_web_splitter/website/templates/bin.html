@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% block title %}Bin{% endblock %}
+
+{% block content %}
+<style>
+        body{
+            background: #8396d4;
+        }
+</style>
+
+<h3>Deleted Bills and Notes</h3>
+{% if not notes and not splits %}
+    <p><strong>You have no notes or bills in your bin</strong></p>
+    {% else %}
+        {% for note in notes %}
+            <div style="display:flex; gap:15px; margin:15px; align-items:center;">
+
+                <textarea style="resize:none; flex:1; width:100%;" readonly>{{note.data}}</textarea>
+
+                <button type="button" onclick="restoreNote('{{note.id}}')">
+                    Restore
+                </button>
+
+                <button type="button" onclick="permanentlyDeleteNote('{{note.id}}')">
+                    Delete permanently
+                </button>
+
+            </div>
+        {% endfor %}
+
+        {% for split in splits %}
+            <div style="display:flex; gap:15px; margin:15px;">
+
+                <textarea style="resize:none; flex:1; width:100%;" readonly>{{split.item}}</textarea>
+                <textarea style="resize:none; flex:1; width:100%;" readonly>Total amount: {{split.total_amount}}</textarea>
+                <textarea style="resize:none; flex:1; width:100%;" readonly>Number of people: {{split.number_people}}</textarea>
+                <textarea style="resize:none; flex:1; width:100%;" readonly>Already paid: {{split.budget}}</textarea>
+                <textarea style="resize:none; flex:1; width:100%;" readonly>Due date:    {{split.due_date}}</textarea>
+                {% if (split.total_amount - split.budget)<=0 %}
+                    <textarea style="resize:none; flex:1; width:100%;" readonly>Status: paid</textarea>
+                {% else %}
+                    <textarea style="resize:none; flex:1; width:100%;" readonly>Status: unpaid</textarea>
+                {% endif %}
+                <button type="button" onclick="restoreItem('{{split.id}}')">
+                    Restore
+                </button>
+
+                <button type="button" onclick="permanentlyDeleteItem('{{split.id}}')">
+                    Delete permanently
+                </button>
+
+            </div>
+
+
+
+        {% endfor %}
+
+{% endif %}
+
+{% endblock %}
